@@ -5,6 +5,8 @@ router.get('/', (req, res) => {
   res.render('form');
 });
 
-router.post('/', (req, res) => {});
+router.post('/', (req, res, next) => {
+  next();
+});
 
 module.exports = router;

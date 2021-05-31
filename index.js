@@ -14,6 +14,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(morgan('tiny'));
 
+app.use(express.urlencoded({ extended: false }));
+
 const messages = [
   {
     text: 'Hi there!',
@@ -31,7 +33,18 @@ app.get('/', (req, res) => {
   res.render('index', { messages });
 });
 
+//Form stuff
 app.use('/new', formRouter);
+
+//Intercept post requests
+app.use((req, res, next) => {
+  let { name, message } = req.body;
+
+  let newMessage = { user: name, text: message, timestamp: new Date() };
+  messages.push(newMessage);
+
+  res.redirect('/');
+});
 
 app.use((req, res, next) => {
   next(createError(404, 'Resource not found.'));
