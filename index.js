@@ -6,15 +6,32 @@ const PORT = 3000;
 const path = require('path');
 const morgan = require('morgan');
 
+const formRouter = require('./routes/form');
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(morgan('tiny'));
 
+const messages = [
+  {
+    text: 'Hi there!',
+    user: 'Yuki',
+    timestamp: new Date(),
+  },
+  {
+    text: 'Here we are.',
+    user: 'Albert',
+    timestamp: new Date(),
+  },
+];
+
 app.get('/', (req, res) => {
-  res.render('test');
+  res.render('index', { messages });
 });
+
+app.use('/new', formRouter);
 
 app.use((req, res, next) => {
   next(createError(404, 'Resource not found.'));
@@ -25,6 +42,7 @@ app.use((err, req, res, next) => {
     return res.status(404).send(err.message);
   }
 
+  console.log(err);
   res.status(500).send('Something went wrong.');
 });
 
