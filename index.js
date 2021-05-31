@@ -36,8 +36,7 @@ app.get('/', (req, res) => {
 //Form stuff
 app.use('/new', formRouter);
 
-//Intercept post requests
-app.use((req, res, next) => {
+app.post('/new', (req, res) => {
   let { name, message } = req.body;
 
   let newMessage = { user: name, text: message, timestamp: new Date() };
