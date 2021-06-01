@@ -1,3 +1,3 @@
-[Live Preview](https://alessandrovinciabc.github.io/mini-msg-board)
+[Live Preview](https://mini-cool-board.herokuapp.com/)
 
 ![](screenshot.png)
