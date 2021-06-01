@@ -8,6 +8,8 @@ const morgan = require('morgan');
 
 const formRouter = require('./routes/form');
 
+const messages = require('./models/board');
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -16,34 +18,15 @@ app.use(morgan('tiny'));
 
 app.use(express.urlencoded({ extended: false }));
 
-const messages = [
-  {
-    text: 'Hi there!',
-    user: 'Yuki',
-    timestamp: new Date(),
-  },
-  {
-    text: 'Here we are.',
-    user: 'Albert',
-    timestamp: new Date(),
-  },
-];
+//               Route Handling
 
 app.get('/', (req, res) => {
   res.render('index', { messages });
 });
 
-//Form stuff
 app.use('/new', formRouter);
 
-app.post('/new', (req, res) => {
-  let { name, message } = req.body;
-
-  let newMessage = { user: name, text: message, timestamp: new Date() };
-  messages.push(newMessage);
-
-  res.redirect('/');
-});
+//               Error Handling
 
 app.use((req, res, next) => {
   next(createError(404, 'Resource not found.'));
@@ -57,6 +40,8 @@ app.use((err, req, res, next) => {
   console.log(err);
   res.status(500).send('Something went wrong.');
 });
+
+/**********************************************/
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);
