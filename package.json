@@ -1,6 +1,9 @@
 {
   "name": "mini-msg-board",
   "private": true,
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "css-compile": "sass --style=compressed scss:static/css",
     "css-watch": "sass --watch scss:static/css",
