@@ -5,17 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Message Board</title>
+
+    <link rel="stylesheet" href="/css/main.css" />
   </head>
-  <body>
+  <body class="translate-middle">
     <a href="/new">Add new message &gt;</a>
-    <main>
-      <% messages.forEach((message) => { %>
-      <article class="Board__Message">
-        <p class="Message__time"><%= message.timestamp.toLocaleString() %></p>
-        <p class="Message__owner"><%= message.user %></p>
-        <p class="Message__text"><%= message.text %></p>
-      </article>
-      <% }); %>
+    <main class="Board">
+      <div
+        class="
+          Board__Container
+          d-flex
+          falign-items-center
+          flex-direction-column
+        "
+      >
+        <% messages.forEach((message) => { %>
+        <article class="Board__Message p-2">
+          <p class="Message__time"><%= message.timestamp.toLocaleString() %></p>
+          <p class="Message__owner"><%= message.user %></p>
+          <p class="Message__text"><%= message.text %></p>
+        </article>
+        <% }); %>
+      </div>
     </main>
   </body>
 </html>
