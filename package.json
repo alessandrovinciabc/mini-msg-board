@@ -9,7 +9,8 @@
     "css-watch": "sass --watch scss:static/css",
     "start": "npm run css-compile && node index.js",
     "start-dev": "npm run css-watch & nodemon index.js",
-    "start-debug": "DEBUG=express:* npm run start-dev"
+    "start-debug": "DEBUG=express:* npm run start-dev",
+    "heroku-postbuild": "npm run css-compile"
   },
   "dependencies": {
     "@alexabcdev/boxes": "^1.2.2",
